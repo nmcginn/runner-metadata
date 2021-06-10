@@ -1,0 +1,5 @@
+name: "Instance Metadata"
+description: "Print EC2 Runner Metadata"
+runs:
+  using: "node12"
+  main: "dist/index.js"

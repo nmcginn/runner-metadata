@@ -1,0 +1,12 @@
+on:
+  push:
+    branches:
+      - master
+jobs:
+  test_metadata_job:
+    runs-on: self-hosted
+    name: Instance Metadata
+    steps:
+      - name: Instance Metadata
+        id: audit
+        uses: nmcginn/runner-metadata@v1.0

@@ -1,0 +1,24 @@
+{
+  "name": "runner-metadata",
+  "version": "1.0.0",
+  "description": "EC2 GitHub Actions Runner Metadata",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nmcginn/runner-metadata.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nmcginn/runner-metadata/issues"
+  },
+  "homepage": "https://github.com/nmcginn/runner-metadata#readme",
+  "dependencies": {
+    "@actions/core": "^1.4.0",
+    "axios": "^0.21.1"
+  }
+}
