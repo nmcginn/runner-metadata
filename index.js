@@ -4,7 +4,8 @@ const axios = require('axios');
 const padding = 22;
 
 const pad = (str, len = padding) => `\x1b[36m${str.data.padEnd(padding)}\x1b[0m`;
-const header = (h1, h2, h3) => `*    ${h1.padEnd(padding)}|  ${h2.padEnd(padding)}|  ${h3.padEnd(padding)}  *`;
+const header = (h1, h2, h3) => `*  ${h1.padEnd(padding)}|  ${h2.padEnd(padding)}|  ${h3.padEnd(padding)}  *`;
+const row = (c1, c2, c3) => `*  ${pad(c1)}|  ${pad(c2)}|  ${pad(c3, padding + 4)}}*`;
 
 async function main() {
     const ec2 = 'http://169.254.169.254/latest/meta-data/';
@@ -20,10 +21,10 @@ async function main() {
     console.log('********************************************************************************');
 
     console.log(header("AMI Id", "Instance Type", "Lifecycle"));
-    console.log(`*    ${pad(ami)}|  ${pad(type)}|  ${pad(lifecycle)}  *`);
+    console.log(row(ami, type, lifecycle));
 
     console.log(header("Instance Id", "IP Address", "MAC Address"));
-    console.log(`*    ${pad(id)}|  ${pad(ip)}|  ${pad(mac)}  *`);
+    console.log(row(id, ip, mac));
 
     if (core.getInput('network') || true) {
         const [vpc, subnet, cidr] = await axios.all([
@@ -33,7 +34,7 @@ async function main() {
         ]);
 
         console.log(header("VPC Id", "CIDR Block", "Subnet Id"));
-        console.log(`*    ${pad(vpc)}|  ${pad(cidr)}|  ${pad(subnet, padding + 2)}*`);
+        console.log(row(vpc, cidr, subnet));
     }
 
     console.log('********************************************************************************');
