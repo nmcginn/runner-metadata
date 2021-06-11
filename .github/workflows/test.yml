@@ -7,6 +7,11 @@ jobs:
     runs-on: self-hosted
     name: Instance Metadata
     steps:
-      - name: Instance Metadata
-        id: audit
-        uses: nmcginn/runner-metadata@v1.0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Run Script
+        run: node index.js
+      # - name: Instance Metadata
+      #   id: audit
+      #   uses: nmcginn/runner-metadata@v1.0
