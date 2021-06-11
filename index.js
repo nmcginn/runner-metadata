@@ -20,11 +20,11 @@ async function main() {
 
     console.log('********************************************************************************');
 
-    console.log(header("AMI Id", "Instance Type", "Lifecycle"));
-    console.log(row(ami, type, lifecycle));
+    console.log(header("Instance Id", "Instance Type", "Lifecycle"));
+    console.log(row(id, type, lifecycle));
 
-    console.log(header("Instance Id", "IP Address", "MAC Address"));
-    console.log(row(id, ip, mac));
+    console.log(header("AMI Id", "IP Address", "MAC Address"));
+    console.log(row(ami, ip, mac));
 
     if (core.getInput('network') || true) {
         const [vpc, subnet, cidr] = await axios.all([
@@ -36,6 +36,8 @@ async function main() {
         console.log(header("VPC Id", "CIDR Block", "Subnet Id"));
         console.log(row(vpc, cidr, subnet));
     }
+
+    // TODO: disk space, uptime, system load
 
     console.log('********************************************************************************');
 }
