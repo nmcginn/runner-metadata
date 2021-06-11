@@ -13,11 +13,23 @@ async function main() {
         axios.get(`${ec2}local-ipv4`),
         axios.get(`${ec2}mac`)
     ]);
+
     console.log('********************************************************************************');
     console.log('*    AMI Id                |  Instance Type         |  Lifecycle               *');
     console.log(`*    ${pad(ami)}|  ${pad(type)}|  ${pad(lifecycle)}  *`);
     console.log('*    Instance Id           |  IP Address            |  MAC Address             *');
     console.log(`*    ${pad(id)}|  ${pad(ip)}|  ${pad(mac)}  *`);
+
+    if (core.getInput('network') || true) {
+        const [vpc, subnet, cidr] = await axios.all([
+            axios.get(`${ec2}network/interfaces/macs/${mac.data}/vpc-id`),
+            axios.get(`${ec2}network/interfaces/macs/${mac.data}/subnet-id`),
+            axios.get(`${ec2}network/interfaces/macs/${mac.data}/vpc-ipv4-cidr-block`)
+        ]);
+        console.log('*    VPC Id                |  Subnet Id         |  CIDR Block               *');
+        console.log(`*    ${pad(vpc)}|  ${pad(subnet)}|  ${pad(cidr)}  *`);
+    }
+
     console.log('********************************************************************************');
 }
 
