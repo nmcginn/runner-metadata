@@ -3,8 +3,8 @@ const axios = require('axios');
 
 const padding = 22;
 
-const pad = (str) => `\x1b[36m${str.data.padEnd(padding).substring(0, padding)}\x1b[0m`;
-const header = (h1, h2, h3) => `*    ${h1.padEnd(padding)}|  ${h2.padEnd(padding)}|  ${h3.padEnd(padding)}*`;
+const pad = (str, len = padding) => `\x1b[36m${str.data.padEnd(padding)}\x1b[0m`;
+const header = (h1, h2, h3) => `*    ${h1.padEnd(padding)}|  ${h2.padEnd(padding)}|  ${h3.padEnd(padding)}  *`;
 
 async function main() {
     const ec2 = 'http://169.254.169.254/latest/meta-data/';
@@ -32,8 +32,8 @@ async function main() {
             axios.get(`${ec2}network/interfaces/macs/${mac.data}/vpc-ipv4-cidr-block`)
         ]);
 
-        console.log(header("VPC Id", "Subnet Id", "CIDR Block"));
-        console.log(`*    ${pad(vpc)}|  ${pad(subnet)}|  ${pad(cidr)}  *`);
+        console.log(header("VPC Id", "CIDR Block", "Subnet Id"));
+        console.log(`*    ${pad(vpc)}|  ${pad(cidr)}|  ${pad(subnet, padding + 2)}*`);
     }
 
     console.log('********************************************************************************');
