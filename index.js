@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const axios = require('axios');
 
-const pad = (str) => str.data.padEnd(22, ' ');
+const pad = (str) => `\x1b[36m${str.data.padEnd(22, ' ')}\x1b[0m`;
 
 async function main() {
     const ec2 = 'http://169.254.169.254/latest/meta-data/';
