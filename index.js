@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const axios = require('axios');
 
-const pad = (str) => `\x1b[36m${str.data.padEnd(22, ' ')}\x1b[0m`;
+const pad = (str) => `\x1b[36m${str.data.padEnd(22).substring(0, 22)}\x1b[0m`;
 
 async function main() {
     const ec2 = 'http://169.254.169.254/latest/meta-data/';
@@ -26,7 +26,7 @@ async function main() {
             axios.get(`${ec2}network/interfaces/macs/${mac.data}/subnet-id`),
             axios.get(`${ec2}network/interfaces/macs/${mac.data}/vpc-ipv4-cidr-block`)
         ]);
-        console.log('*    VPC Id                |  Subnet Id         |  CIDR Block               *');
+        console.log('*    VPC Id                |  Subnet Id             |  CIDR Block               *');
         console.log(`*    ${pad(vpc)}|  ${pad(subnet)}|  ${pad(cidr)}  *`);
     }
 
