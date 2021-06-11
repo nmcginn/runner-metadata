@@ -4,7 +4,7 @@ const axios = require('axios');
 const padding = 22;
 
 const pad = (str, len = padding) => `\x1b[36m${str.data.padEnd(len)}\x1b[0m`;
-const header = (h1, h2, h3) => `*  ${h1.padEnd(padding)}|  ${h2.padEnd(padding)}|  ${h3.padEnd(padding)}*`;
+const header = (h1, h2, h3) => `*  ${h1.padEnd(padding)}|  ${h2.padEnd(padding)}|  ${h3.padEnd(padding + 4)}*`;
 const row = (c1, c2, c3) => `*  ${pad(c1)}|  ${pad(c2)}|  ${pad(c3, padding + 4)}*`;
 
 async function main() {
